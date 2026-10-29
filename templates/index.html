@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <title>F1 Race Intelligence | Ansh Kourav</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101114; --panel:#191a1f; --text:#f5f5f5; --muted:#b7b8bf; --red:#e10600; --line:#303139; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); }
+    header { position:sticky; top:0; z-index:5; background:rgba(16,17,20,.95); border-bottom:1px solid var(--line); backdrop-filter:blur(10px); }
+    .nav { max-width:1440px; margin:auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:.04em; }
+    .mark { background:var(--red); width:10px; height:28px; transform:skew(-16deg); display:inline-block; }
+    nav { display:flex; gap:8px; flex-wrap:wrap; }
+    nav a, .button { color:var(--text); text-decoration:none; padding:10px 14px; border-radius:8px; font-size:.93rem; font-weight:650; border:1px solid transparent; }
+    nav a:hover, nav a.active { background:#292a30; border-color:#3a3b43; }
+    .button.primary { background:var(--red); border-color:var(--red); }
+    .button.primary:hover { background:#bd0500; }
+    main { max-width:1440px; margin:auto; padding:34px 24px 54px; }
+    .eyebrow { color:#ff6965; text-transform:uppercase; letter-spacing:.16em; font-size:.75rem; font-weight:800; }
+    h1 { font-size:clamp(2rem,4vw,3.4rem); line-height:1.05; margin:10px 0 12px; letter-spacing:-.04em; }
+    .intro { max-width:780px; color:var(--muted); line-height:1.7; margin:0 0 25px; }
+    .toolbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin:24px 0 16px; }
+    .toolbar h2 { margin:0; font-size:1.25rem; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .button { display:inline-flex; align-items:center; justify-content:center; border-color:var(--line); background:var(--panel); }
+    .embed-shell { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:10px; overflow:hidden; }
+    .tableau-frame { display:block; width:100%; height: min(76vh, 900px); min-height:600px; border:0; background:#fff; border-radius:8px; }
+    .note { color:var(--muted); font-size:.9rem; line-height:1.6; margin-top:14px; }
+    .fallback { display:inline-block; color:#fff; margin-top:10px; }
+    footer { border-top:1px solid var(--line); color:var(--muted); padding:22px 24px; text-align:center; font-size:.88rem; }
+    @media (max-width:700px) {
+      .nav { padding:14px 16px; align-items:flex-start; flex-direction:column; }
+      nav { width:100%; }
+      nav a { padding:9px 10px; }
+      main { padding:26px 14px 40px; }
+      .embed-shell { padding:5px; }
+      .tableau-frame { height:72vh; min-height:520px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand"><span class="mark" aria-hidden="true"></span><span>F1 RACE INTELLIGENCE</span></div>
+    <nav aria-label="Main navigation">
+      <a href="/" class="{{ 'active' if active_page == 'dashboard' else '' }}">Dashboard</a>
+      <a href="/story" class="{{ 'active' if active_page == 'story' else '' }}">Race Story</a>
+      <a href="{{ story_url }}" target="_blank" rel="noopener noreferrer">Open on Tableau ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="eyebrow">Motorsport · Data · Performance</div>
+  {% if active_page == 'story' %}
+    <h1>Race Story</h1>
+    <p class="intro">Explore the published Tableau story and move through the race analysis. Use the navigation above to return to the dashboard at any time.</p>
+    <div class="toolbar">
+      <h2>Story visualization</h2>
+      <div class="actions">
+        <a class="button" href="/">← Back to dashboard</a>
+        <a class="button primary" href="{{ story_url }}" target="_blank" rel="noopener noreferrer">Open full story ↗</a>
+      </div>
+    </div>
+    <div class="embed-shell">
+      <iframe class="tableau-frame" title="F1 Race Intelligence Story" src="{{ story_url }}" loading="lazy" allowfullscreen></iframe>
+    </div>
+    <p class="note">If Tableau does not load inside this page, open the story directly using the button above. The visualization must be published and accessible on Tableau Public.</p>
+  {% else %}
+    <h1>Race data. Clearer insights.</h1>
+    <p class="intro">A focused view of Formula 1 race intelligence. Explore the existing Tableau dashboard below, then switch to the Race Story for the narrative view of the analysis.</p>
+    <div class="toolbar">
+      <h2>F1 Race Intelligence Dashboard</h2>
+      <div class="actions">
+        <a class="button" href="/story">Explore race story →</a>
+        <a class="button primary" href="{{ dashboard_url }}" target="_blank" rel="noopener noreferrer">Open full dashboard ↗</a>
+      </div>
+    </div>
+    <div class="embed-shell">
+      <iframe class="tableau-frame" title="F1 Race Intelligence Dashboard" src="{{ dashboard_url }}" loading="lazy" allowfullscreen></iframe>
+    </div>
+    <p class="note">This page embeds the published Tableau dashboard. Use the Tableau link if the embedded visualization is blocked by browser settings or Tableau availability.</p>
+  {% endif %}
+</main>
+
+<footer>F1 Race Intelligence · Project by Ansh Kourav · Visualizations hosted on Tableau Public</footer>
+</body>
+</html>
