@@ -6,13 +6,13 @@ app = Flask(__name__)
 
 DASHBOARD_URL = os.getenv(
     "TABLEAU_DASHBOARD_URL",
-    "https://public.tableau.com/views/AnshProject/F1RaceIntelligenceDashboard?:showVizHome=no&:embed=true"
+    "https://public.tableau.com/views/Atharvjoshi/F1RaceIntelligenceDashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
 )
 
 # Replace this with the actual published story URL.
 STORY_URL = os.getenv(
     "TABLEAU_STORY_URL",
-    "https://public.tableau.com/views/AnshProject/Story1?:showVizHome=no&:embed=true"
+    "https://public.tableau.com/views/Atharvjoshistory/Story1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
 )
 
 @app.route("/")
